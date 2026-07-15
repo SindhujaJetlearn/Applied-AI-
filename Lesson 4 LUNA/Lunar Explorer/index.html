@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunar Explorer - Museum Exhibit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="starfield"></div>
+
+    <nav class="glass-nav">
+        <div class="logo">
+            <div class="moon-pulse"></div>
+            <span>LUNAR EXPLORER</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#hero">Mission Control</a></li>
+            <li><a href="#timeline">Timeline</a></li>
+            <li><a href="#archive">Archive</a></li>
+            <li><a href="#quiz">Simulator</a></li>
+        </ul>
+    </nav>
+
+    <div class="luna-badge group">
+        <span>L.U.N.A SHOWCASE</span>
+        <div class="badge-hover">
+            <p>SYSTEM STATUS: <span class="teal">ONLINE</span></p>
+            <p>VERSION: 2.4.1</p>
+            <p>UPTIME: 99.99%</p>
+        </div>
+    </div>
+
+    <header id="hero">
+        <div class="hero-content">
+            <h1 class="hologram-text">Humanity's Journey to the Moon</h1>
+            <p class="subtitle">Experience the interactive archive of lunar exploration, powered by L.U.N.A. system intelligence.</p>
+            <a href="#timeline" class="btn-glow">START EXPLORING</a>
+        </div>
+        <div class="hero-visual">
+            <div class="earth-moon-system">
+                <img src="earth.png" alt="Earth" class="earth">
+                <div class="orbit-plane">
+                    <div class="moon-sphere"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker-item">LUNA 2 IMPACTS SURFACE (1959)</div>
+            <div class="ticker-item separator">•</div>
+            <div class="ticker-item">APOLLO 11 LANDS (1969)</div>
+            <div class="ticker-item separator">•</div>
+            <div class="ticker-item">CHANDRAYAAN-3 SOUTH POLE SUCCESS (2023)</div>
+            <div class="ticker-item separator">•</div>
+            <div class="ticker-item">CHANG'E 6 RETURNS FAR-SIDE SAMPLES (2024)</div>
+            <div class="ticker-item separator">•</div>
+            <div class="ticker-item">ARTEMIS MISSIONS PREPARING FOR LAUNCH</div>
+        </div>
+    </div>
+
+    <section id="stats" class="stats-grid">
+        <div class="stat-card glass-panel">
+            <h3 class="stat-label">TOTAL MISSIONS</h3>
+            <div class="stat-value gold">140+</div>
+        </div>
+        <div class="stat-card glass-panel">
+            <h3 class="stat-label">HUMANS ON MOON</h3>
+            <div class="stat-value blue">12</div>
+        </div>
+        <div class="stat-card glass-panel">
+            <h3 class="stat-label">SAMPLES RETURNED</h3>
+            <div class="stat-value teal">382 KG</div>
+        </div>
+        <div class="stat-card glass-panel">
+            <h3 class="stat-label">NATIONS REACHED</h3>
+            <div class="stat-value lilac">5</div>
+        </div>
+    </section>
+
+    <section id="timeline">
+        <h2 class="section-title">MISSION TIMELINE</h2>
+        <div class="timeline-container">
+            <div class="timeline-node left">
+                <div class="node-content glass-panel">
+                    <span class="year gold">1959</span>
+                    <h4>Luna 2</h4>
+                    <p>First human-made object to reach the Moon.</p>
+                </div>
+            </div>
+            <div class="timeline-node right">
+                <div class="node-content glass-panel">
+                    <span class="year blue">1969</span>
+                    <h4>Apollo 11</h4>
+                    <p>Neil Armstrong and Buzz Aldrin become the first humans to walk on the lunar surface.</p>
+                </div>
+            </div>
+            <div class="timeline-node left">
+                <div class="node-content glass-panel">
+                    <span class="year teal">2023</span>
+                    <h4>Chandrayaan-3</h4>
+                    <p>India becomes the first nation to successfully land near the lunar south pole.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="archive">
+        <h2 class="section-title">3D MISSION ARCHIVE</h2>
+        <div class="archive-grid">
+            <div class="archive-card glass-panel" data-tilt>
+                <img src="artemis.png" alt="Artemis Mission" class="card-img">
+                <div class="card-info">
+                    <h4>Artemis Program</h4>
+                    <p>Returning humanity to the Moon to establish a sustainable presence.</p>
+                </div>
+            </div>
+            <div class="archive-card glass-panel" data-tilt>
+                <div class="card-placeholder lilac-glow">CHANG'E 6</div>
+                <div class="card-info">
+                    <h4>Chang'e 6</h4>
+                    <p>First mission to return samples from the lunar far side.</p>
+                </div>
+            </div>
+            <div class="archive-card glass-panel" data-tilt>
+                <div class="card-placeholder gold-glow">APOLLO 15</div>
+                <div class="card-info">
+                    <h4>Apollo 15</h4>
+                    <p>First use of the Lunar Roving Vehicle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz">
+        <h2 class="section-title">SIMULATOR QUIZ</h2>
+        <div class="quiz-container glass-panel">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="quiz-content">
+                <h3 id="question-text">Initializing Simulator...</h3>
+                <div class="options-grid" id="options-container">
+                    <!-- Options populated by JS -->
+                </div>
+            </div>
+            <div id="confetti-container"></div>
+        </div>
+    </section>
+
+    <div id="luna-assistant-widget">
+        <button id="luna-btn" class="glass-panel">
+            <span class="pulse-dot"></span>
+            🎙️ L.U.N.A
+        </button>
+        <div id="luna-terminal" class="glass-panel hidden">
+            <div class="terminal-header">
+                <span class="pulse-dot"></span>
+                Lunar Universal Navigation Assistant
+            </div>
+            <div class="terminal-body" id="luna-output">
+                System ready. Click the microphone to ask a question about the Moon.
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
