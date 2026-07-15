@@ -1,0 +1,463 @@
+:root {
+    --bg-color: #050510;
+    --neon-blue: #00f3ff;
+    --neon-pink: #ff00ea;
+    --neon-green: #39ff14;
+    --neon-yellow: #fcee0a;
+    --glass-bg: rgba(10, 15, 30, 0.7);
+    --glass-border: rgba(0, 243, 255, 0.3);
+    
+    --font-heading: 'Orbitron', sans-serif;
+    --font-mono: 'Fira Code', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--neon-blue);
+    font-family: var(--font-mono);
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Background Effects */
+.scanlines {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0,0,0,0.2) 50%,
+        rgba(0,0,0,0.2)
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.6;
+}
+
+.noise {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 49;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 2rem;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* Glassmorphism Panels */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1), inset 0 0 20px rgba(0, 243, 255, 0.05);
+}
+
+/* Header */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.game-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px var(--neon-pink),
+        0 0 40px var(--neon-pink),
+        0 0 80px var(--neon-pink);
+    animation: pulsate 2s infinite alternate;
+}
+
+@keyframes pulsate {
+    100% {
+        text-shadow: 
+            0 0 4px #fff,
+            0 0 11px #fff,
+            0 0 19px var(--neon-pink),
+            0 0 40px var(--neon-pink),
+            0 0 80px var(--neon-pink),
+            0 0 90px var(--neon-pink);
+    }
+    0% {
+        text-shadow: 
+            0 0 2px #fff,
+            0 0 4px #fff,
+            0 0 6px var(--neon-pink),
+            0 0 10px var(--neon-pink),
+            0 0 45px var(--neon-pink),
+            0 0 55px var(--neon-pink);
+    }
+}
+
+/* Stats */
+.player-stats {
+    display: flex;
+    gap: 2rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-bar {
+    width: 120px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat-fill {
+    height: 100%;
+    box-shadow: 0 0 10px currentColor;
+}
+
+.hp-fill { background-color: var(--neon-green); color: var(--neon-green); }
+.ram-fill { background-color: var(--neon-blue); color: var(--neon-blue); }
+
+.stat-val {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.credits-val {
+    color: var(--neon-yellow);
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px var(--neon-yellow);
+}
+
+/* Main Content Area */
+.main-content {
+    display: flex;
+    gap: 1.5rem;
+    flex: 1;
+    min-height: 0;
+}
+
+/* Terminal Section */
+.terminal-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.terminal-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: var(--neon-blue);
+    box-shadow: 0 0 15px var(--neon-blue);
+}
+
+.terminal-display {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-right: 1rem;
+}
+
+/* Scrollbar customization */
+.terminal-display::-webkit-scrollbar {
+    width: 8px;
+}
+.terminal-display::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.3);
+    border-radius: 4px;
+}
+.terminal-display::-webkit-scrollbar-thumb {
+    background: var(--neon-blue);
+    border-radius: 4px;
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.message {
+    padding: 1rem;
+    border-left: 3px solid;
+    background: rgba(0, 0, 0, 0.3);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    animation: slideIn 0.3s ease-out forwards;
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+@keyframes slideIn {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.message.system {
+    border-color: var(--neon-blue);
+    color: #e0fbfc;
+}
+
+.message.puzzle {
+    border-color: var(--neon-pink);
+    color: #fff;
+    background: rgba(255, 0, 234, 0.05);
+}
+
+.puzzle-title {
+    display: block;
+    color: var(--neon-pink);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 5px var(--neon-pink);
+}
+
+.message.player {
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+    align-self: flex-end;
+    border-left: none;
+    border-right: 3px solid var(--neon-green);
+    background: rgba(57, 255, 20, 0.05);
+    text-align: right;
+}
+
+.message.error {
+    border-color: #ff3333;
+    color: #ff3333;
+}
+
+/* Command Line */
+.command-line-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 243, 255, 0.2);
+}
+
+.prompt {
+    color: var(--neon-pink);
+    font-weight: 700;
+    text-shadow: 0 0 5px var(--neon-pink);
+}
+
+.command-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--neon-blue);
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    outline: none;
+    text-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
+}
+
+.command-input::placeholder {
+    color: rgba(0, 243, 255, 0.3);
+}
+
+/* Inventory Panel */
+.inventory-panel {
+    width: 300px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.inventory-title {
+    font-family: var(--font-heading);
+    color: var(--neon-yellow);
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(252, 238, 10, 0.5);
+    border-bottom: 1px solid rgba(252, 238, 10, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+.inventory-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inventory-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.inventory-item:hover {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+    transform: translateX(-5px);
+}
+
+.item-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.item-label {
+    color: #fff;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Blinking cursor effect on input focus */
+.command-input:focus {
+    animation: input-pulse 2s infinite;
+}
+
+@keyframes input-pulse {
+    0%, 100% { text-shadow: 0 0 5px rgba(0, 243, 255, 0.5); }
+    50% { text-shadow: 0 0 15px var(--neon-blue); }
+}
+
+/* Main Menu Overlay */
+.overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(5, 5, 16, 0.95);
+    backdrop-filter: blur(15px);
+    transition: opacity 0.5s ease;
+}
+
+.mega-title {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    color: var(--neon-blue);
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.btn-neon {
+    background: transparent;
+    border: 2px solid var(--neon-pink);
+    color: var(--neon-pink);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    padding: 1rem 3rem;
+    cursor: pointer;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 0, 234, 0.3), inset 0 0 10px rgba(255, 0, 234, 0.1);
+}
+
+.btn-neon:hover {
+    background: rgba(255, 0, 234, 0.2);
+    box-shadow: 0 0 20px var(--neon-pink), inset 0 0 20px rgba(255, 0, 234, 0.4);
+    text-shadow: 0 0 10px #fff;
+    transform: scale(1.05);
+}
+
+/* Options Container */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+    margin-top: 1rem;
+    border-top: 1px dashed rgba(0, 243, 255, 0.3);
+}
+
+.puzzle-btn {
+    background: rgba(0, 243, 255, 0.05);
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    padding: 1rem;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.puzzle-btn::before {
+    content: '>';
+    margin-right: 1rem;
+    color: var(--neon-pink);
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.puzzle-btn:hover {
+    background: rgba(0, 243, 255, 0.15);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+    transform: translateX(10px);
+}
+
+.puzzle-btn:hover::before {
+    opacity: 1;
+}

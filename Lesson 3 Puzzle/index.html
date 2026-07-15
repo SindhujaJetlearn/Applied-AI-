@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON NEXUS // Terminal</title>
+    <meta name="description" content="Cyberpunk command-line game interface">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+    
+    <!-- Main Menu Overlay -->
+    <div id="main-menu" class="overlay glass-panel">
+        <h1 class="game-title glow-text mega-title">NEON_NEXUS</h1>
+        <p class="subtitle">System Initialization Required</p>
+        <button id="start-game-btn" class="btn-neon">INITIALIZE SYSTEM</button>
+    </div>
+
+    <div class="app-container" id="app-container" style="display: none;">
+        <header class="game-header glass-panel">
+            <h1 class="game-title glow-text">NEON_NEXUS</h1>
+            <div class="player-stats">
+                <div class="stat">
+                    <span class="stat-label">HP</span>
+                    <div class="stat-bar"><div class="stat-fill hp-fill" style="width: 85%;"></div></div>
+                    <span class="stat-val">85/100</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">RAM</span>
+                    <div class="stat-bar"><div class="stat-fill ram-fill" style="width: 40%;"></div></div>
+                    <span class="stat-val">4TB</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">CREDITS</span>
+                    <span class="stat-val credits-val">¤ 12,050</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="terminal-section glass-panel">
+                <div class="terminal-display" id="terminal-display">
+                    <div class="message system">SYSTEM: Connection established to Sector 7G.</div>
+                    <div class="message system">SYSTEM: Initializing environment scan...</div>
+                    <div class="message puzzle">
+                        <span class="puzzle-title">[ PUZZLE DETECTED ]</span>
+                        <p>A rusted security gate blocks your path. A keypad requires a 4-digit sequence.</p>
+                        <p>Hint: The year the first synthetic was created.</p>
+                    </div>
+                </div>
+                
+                <div class="command-line-wrapper">
+                    <span class="prompt">root@nexus:~#</span>
+                    <input type="text" id="command-input" class="command-input" placeholder="Type command (e.g., scan, inspect, solve)..." autocomplete="off" spellcheck="false" autofocus>
+                </div>
+                
+                <div id="puzzle-options" class="options-container" style="display: none;">
+                    <!-- Buttons injected here -->
+                </div>
+            </section>
+
+            <aside class="inventory-panel glass-panel">
+                <h2 class="inventory-title">INVENTORY</h2>
+                <ul class="inventory-list" id="inventory-list">
+                    <li class="inventory-item">
+                        <div class="item-icon">🔑</div>
+                        <span class="item-label">Access Card</span>
+                    </li>
+                    <li class="inventory-item">
+                        <div class="item-icon">🔋</div>
+                        <span class="item-label">Energy Cell</span>
+                    </li>
+                    <li class="inventory-item">
+                        <div class="item-icon">💾</div>
+                        <span class="item-label">Encrypted Data</span>
+                    </li>
+                </ul>
+            </aside>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
